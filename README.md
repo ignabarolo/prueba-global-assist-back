@@ -7,17 +7,16 @@ Requirements of the proyect:
 Acceptance criteria:
 - The API must answer at the following endpoint:
 http://localhost:8080/api/entries?DoorId={DoorId}&FromDate={FromDate}&ToDate={ToDate}
--method: GET
--Params
+- method: GET
+- Params
   -FromDate:DateTime:Required
   -ToDate:DateTime:Required
   -DoorId:String:Required
 
-Optional:
--Create the delete method 
+Optional: Create the delete method 
 
 Acceptance criteria:
 - The API must answer at the following endpoint: http://localhost:8080/api/entries/{id}
-- -method: DELETE
--Params
+- method: DELETE
+- Params
   -id:String:Required
