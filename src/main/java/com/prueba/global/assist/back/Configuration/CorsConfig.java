@@ -15,7 +15,8 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins(AllowedApi)
+                .allowedOrigins(AllowedApi) //Solo si se prueba desde el puerto de Angular
+//                .allowedOrigins("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .exposedHeaders("Authorization")

@@ -6,6 +6,9 @@ import com.prueba.global.assist.back.Entity.Entry;
 import com.prueba.global.assist.back.Entity.Guest;
 import com.prueba.global.assist.back.MyExeptions.MyExeption;
 import com.prueba.global.assist.back.Service.ServiceEntry;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,18 +21,47 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/entries")
+@Tag(name = "Entry")
 public class EntryController {
 
     @Autowired
     private ServiceEntry serviceEntry;
 
+    @Operation(
+            description = "The format of the Dates must be: YYYY/MM/DD",
+            summary = "This Endpoint is for Save an Entry",
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "No results found",
+                            responseCode = "401"
+                    )
+            }
+    )
     @PostMapping("/guardar")
     public ResponseEntity<Entry> insertarGuest(@RequestBody EntryDTO entryDTO){
         return new ResponseEntity<>(serviceEntry.saveEntry(entryDTO), HttpStatus.CREATED);
     }
 
-    @GetMapping("/busquedaId/")
-    public ResponseEntity<?> findById(@RequestParam("EntryId") String entryId){
+    @Operation(
+            description = "ENDPOINT: http://localhost:8080/api/entries/sarchid/{id}",
+            summary = "This Endpoint is for Search an Entry by ID",
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "No result found",
+                            responseCode = "401"
+                    )
+            }
+    )
+    @GetMapping("/sarchid/{id}")
+    public ResponseEntity<?> findById(@PathVariable("id") String entryId){
         try {
             return new ResponseEntity<>(serviceEntry.findEntryById(entryId), HttpStatus.OK);
         } catch (MyExeption e) {
@@ -48,6 +80,20 @@ public class EntryController {
 //        }
 //    }
 
+    @Operation(
+            description = "The format of the Dates must be: YYYY/MM/DD",
+            summary = "This Endpoint is for Search Entries by a Date range and a DoorID",
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "No results found",
+                            responseCode = "401"
+                    )
+            }
+    )
     @GetMapping("")
     public ResponseEntity<?> findByIdInARange(@RequestParam("DoorId") String doorId, @RequestParam("FromDate") String fromDate, @RequestParam("ToDate") String toDate){
         try {
@@ -59,9 +105,30 @@ public class EntryController {
         }
     }
 
+    @Operation(
+            description = "ENDPOINT: http://localhost:8080/api/entries/",
+            summary = "This Endpoint is for List all Entries",
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "No results found",
+                            responseCode = "401"
+                    )
+            }
+    )
     @GetMapping("/")
     public ResponseEntity<?> findAll(){
-        return new ResponseEntity<>(serviceEntry.findAll(), HttpStatus.OK);
+        List<Entry> response = serviceEntry.findAll();
+        if (response.size() != 0){
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("No results found", HttpStatus.UNAUTHORIZED);
+        }
+
+
     }
 
     //Controlador de Prueba
@@ -70,6 +137,20 @@ public class EntryController {
 //        return doorId ;
 //    }
 
+    @Operation(
+            description = "ENDPOINT: http://localhost:8080/api/entries/{id}",
+            summary = "This Endpoint is for DELETE an Entry",
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "No result found",
+                            responseCode = "401"
+                    )
+            }
+    )
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, String>> deleteEntry(@PathVariable("id") String entryId){
         try {
