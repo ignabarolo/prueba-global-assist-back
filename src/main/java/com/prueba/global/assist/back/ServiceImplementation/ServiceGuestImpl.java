@@ -1,6 +1,7 @@
 package com.prueba.global.assist.back.ServiceImplementation;
 
 import com.prueba.global.assist.back.Entity.Guest;
+import com.prueba.global.assist.back.MyExeptions.MyExeption;
 import com.prueba.global.assist.back.Repository.GuestRepository;
 import com.prueba.global.assist.back.Service.ServiceGuest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +20,14 @@ public class ServiceGuestImpl implements ServiceGuest {
         guestRepository.save(gest);
         return gest;
     }
-
     @Override
-    public Guest findGuestById(String id) {
+    public Guest findGuestById(String id) throws MyExeption{
         Optional<Guest> rtaGuest = guestRepository.findById(id);
         if (rtaGuest.isPresent()) {
             Guest guest = rtaGuest.get();
             return guest;
         } else {
-            throw new Error("Guest Unknown");
+            throw new MyExeption("Id Guest Unknown");
         }
     }
-
 }

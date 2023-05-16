@@ -1,7 +1,7 @@
 package com.prueba.global.assist.back.Controller;
 
-import com.prueba.global.assist.back.Entity.Door;
 import com.prueba.global.assist.back.Entity.Guest;
+import com.prueba.global.assist.back.MyExeptions.MyExeption;
 import com.prueba.global.assist.back.Service.ServiceGuest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -53,7 +53,11 @@ public class GestController {
             }
     )
     @GetMapping("")
-    public ResponseEntity<Guest> findById(@RequestParam("GuestId") String guestId){
-        return new ResponseEntity<>(gestService.findGuestById(guestId), HttpStatus.OK);
+    public ResponseEntity<?> findById(@RequestParam("GuestId") String guestId){
+        try {
+            return new ResponseEntity<>(gestService.findGuestById(guestId), HttpStatus.OK);
+        } catch (MyExeption e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+        }
     }
 }

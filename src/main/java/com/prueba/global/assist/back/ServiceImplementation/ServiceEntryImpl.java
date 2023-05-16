@@ -29,7 +29,7 @@ public class ServiceEntryImpl implements ServiceEntry {
     private ServiceDoor serviceDoor;
 
     @Override
-    public Entry saveEntry(EntryDTO entryDTO) {
+    public Entry saveEntry(EntryDTO entryDTO) throws MyExeption{
         Entry entry = mapearEntidad(entryDTO);
         entryRepository.save(entry);
         return entry;
@@ -74,7 +74,7 @@ public class ServiceEntryImpl implements ServiceEntry {
     }
 
     @Override
-    public Entry mapearEntidad(EntryDTO entryDTO) {
+    public Entry mapearEntidad(EntryDTO entryDTO) throws MyExeption{
         Guest guest = serviceGuest.findGuestById(entryDTO.getGuestId());
         Door door = serviceDoor.findDoorById(entryDTO.getDoorId());
 

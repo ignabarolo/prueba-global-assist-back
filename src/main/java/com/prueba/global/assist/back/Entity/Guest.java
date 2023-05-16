@@ -17,7 +17,4 @@ public class Guest {
 
     private String firstname;
     private String lastname;
-
-//    @ManyToMany(mappedBy = "guests")
-//    private Set<Door> doors = new HashSet<>();
 }

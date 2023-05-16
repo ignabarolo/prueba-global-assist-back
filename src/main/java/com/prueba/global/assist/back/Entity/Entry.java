@@ -15,7 +15,6 @@ public class Entry {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-
     @ManyToOne
     @JoinColumn(name = "guest_id")
     private Guest guest;
@@ -26,5 +25,4 @@ public class Entry {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date created;
-
 }
