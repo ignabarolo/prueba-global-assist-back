@@ -6,7 +6,7 @@ Requirements of the proyect:
 
 Acceptance criteria:
 - The API must answer at the following endpoint:
-http://localhost:8080/api/entries?DoorId={DoorId}&FromDate={FromDate}&ToDate={ToDate}
+http://server:port/api/entries?DoorId={DoorId}&FromDate={FromDate}&ToDate={ToDate}
 - method: GET
 - Params
   -FromDate:DateTime:Required
@@ -16,11 +16,11 @@ http://localhost:8080/api/entries?DoorId={DoorId}&FromDate={FromDate}&ToDate={To
 Optional: Create the delete method 
 
 Acceptance criteria:
-- The API must answer at the following endpoint: http://localhost:8080/api/entries/{id}
+- The API must answer at the following endpoint: http://server:port/api/entries/{id}
 - method: DELETE
 - Params
   -id:String:Required
   
 Documentation:  
 - Swagger is used to document the API.
-- The URL to view the API documentation is: localhost:8080/swagger-ui.html  
+- The URL to view the API documentation is: server:port/swagger-ui.html  
