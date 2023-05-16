@@ -20,3 +20,7 @@ Acceptance criteria:
 - method: DELETE
 - Params
   -id:String:Required
+  
+Documentation:  
+Swagger is used to document the API.
+The URL to view the API documentation is: localhost:8080/swagger-ui.html  
