@@ -23,4 +23,4 @@ Acceptance criteria:
   
 Documentation:  
 - Swagger is used to document the API.
-- The URL to view the API documentation is: server:port/swagger-ui.html  
+- The URL to view the API documentation is: http://server:port/swagger-ui.html  
