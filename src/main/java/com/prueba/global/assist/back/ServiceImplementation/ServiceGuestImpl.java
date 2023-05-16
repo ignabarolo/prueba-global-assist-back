@@ -1,4 +1,4 @@
-package com.prueba.global.assist.back.Service.Implementation;
+package com.prueba.global.assist.back.ServiceImplementation;
 
 import com.prueba.global.assist.back.Entity.Guest;
 import com.prueba.global.assist.back.Repository.GuestRepository;

@@ -20,7 +20,7 @@ public class DoorController {
         return new ResponseEntity<>(serviceDoor.saveDoor(door), HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<Door> findById(@RequestParam("DoorId") String doorId){
         return new ResponseEntity<>(serviceDoor.findDoorById(doorId), HttpStatus.OK);
     }

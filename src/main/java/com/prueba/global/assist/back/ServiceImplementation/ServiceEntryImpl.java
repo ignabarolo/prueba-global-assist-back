@@ -1,4 +1,4 @@
-package com.prueba.global.assist.back.Service.Implementation;
+package com.prueba.global.assist.back.ServiceImplementation;
 
 import com.prueba.global.assist.back.DTO.EntryDTO;
 import com.prueba.global.assist.back.Entity.Door;
@@ -23,19 +23,10 @@ import java.util.Optional;
 public class ServiceEntryImpl implements ServiceEntry {
     @Autowired
     private EntryRepository entryRepository;
-
     @Autowired
     private ServiceGuest serviceGuest;
-
     @Autowired
     private ServiceDoor serviceDoor;
-
-//    @Override
-//    public Entry saveEntry(EntryDTO entryDTO, String idGuest, String idDoor) {
-//        Entry entry = mapearEntidad(entryDTO,idGuest,idDoor);
-//        entryRepository.save(entry);
-//        return entry;
-//    }
 
     @Override
     public Entry saveEntry(EntryDTO entryDTO) {
@@ -55,14 +46,7 @@ public class ServiceEntryImpl implements ServiceEntry {
         }
     }
 
-    //Lista por rango solamente
-//    @Override
-//    public List<Entry> findEntryByDateRange(Date fromDate, Date toDate) {
-//        return entryRepository.findByStartDateBetween(fromDate,toDate);
-//    }
-
-    //Lista por rango y id
-    @Override
+    @Override//Lista por rango y ID
     public List<Entry> findEntryByDateRangeAndDoorId(String fromDate, String toDate, String doorId) throws MyExeption {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date fromDateTime = null;
@@ -88,19 +72,6 @@ public class ServiceEntryImpl implements ServiceEntry {
         entryDTO.setCreated(entry.getCreated());
         return entryDTO;
     }
-
-//    @Override
-//    public Entry mapearEntidad(EntryDTO entryDTO, String idGuest, String idDoor) {
-//        Guest guest = serviceGuest.findGuestById(idGuest);
-//        Door door = serviceDoor.findDoorById(idDoor);
-//
-//        Entry entry = new Entry();
-//        entry.setId(entryDTO.getId());
-//        entry.setGuest(guest);
-//        entry.setDoor(door);
-//        entry.setCreated(entryDTO.getCreated());
-//        return entry;
-//    }
 
     @Override
     public Entry mapearEntidad(EntryDTO entryDTO) {

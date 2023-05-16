@@ -19,7 +19,7 @@ public class GestController {
         return ResponseEntity.ok(gestService.saveGuest(guest));
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<Guest> findById(@RequestParam("GuestId") String guestId){
         return new ResponseEntity<>(gestService.findGuestById(guestId), HttpStatus.OK);
     }

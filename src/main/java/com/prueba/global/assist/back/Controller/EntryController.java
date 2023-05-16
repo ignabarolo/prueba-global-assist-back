@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/entries")
 public class EntryController {
@@ -24,39 +23,26 @@ public class EntryController {
     @Autowired
     private ServiceEntry serviceEntry;
 
-//    @PostMapping("/guardar")
-//    public ResponseEntity<Entry> insertarGuest(@RequestBody EntryDTO entryDTO, @RequestParam("GuestId") String guestId, @RequestParam("DoorId") String doorId){
-//        return new ResponseEntity<>(serviceEntry.saveEntry(entryDTO,guestId,doorId), HttpStatus.CREATED);
-//    }
-
     @PostMapping("/guardar")
     public ResponseEntity<Entry> insertarGuest(@RequestBody EntryDTO entryDTO){
         return new ResponseEntity<>(serviceEntry.saveEntry(entryDTO), HttpStatus.CREATED);
     }
 
-//    @GetMapping("/busquedaId")
-//    public ResponseEntity<?> findById(@RequestParam("EntryId") String entryId){
-//        try {
-//            return new ResponseEntity<>(serviceEntry.findEntryById(entryId), HttpStatus.OK);
-//        } catch (MyExeption e) {
-//            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
-//        }
-//
-//    }
+    @GetMapping("/busquedaId/")
+    public ResponseEntity<?> findById(@RequestParam("EntryId") String entryId){
+        try {
+            return new ResponseEntity<>(serviceEntry.findEntryById(entryId), HttpStatus.OK);
+        } catch (MyExeption e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+        }
 
-//    @GetMapping("/{doorId}/{fromDate}/{toDate}")
-//    public ResponseEntity<?> findByIdInARange(@PathVariable("doorId") String doorId, @PathVariable() String fromDate, @PathVariable() String toDate){
-//        try {
-//            return new ResponseEntity<>(serviceEntry.findEntryByDateRangeBetweenAndDoorId(fromDate, toDate, doorId), HttpStatus.OK);
-//        } catch (MyExeption e) {
-//            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
-//        }
-//    }
+    }
 
 //    @GetMapping("/{doorId}/{fromDate}/{toDate}")
 //    public ResponseEntity<?> findByIdInARange(@PathVariable("doorId") String doorId, @PathVariable("fromDate") String fromDate, @PathVariable() String toDate){
 //        try {
-//            return new ResponseEntity<>(serviceEntry.findEntryByDateRangeBetweenAndDoorId(fromDate, toDate, doorId), HttpStatus.OK);
+//            System.out.println(doorId + " " + fromDate + " " + toDate);
+//            return new ResponseEntity<>(serviceEntry.findEntryByDateRangeAndDoorId(fromDate, toDate, doorId), HttpStatus.OK);
 //        } catch (MyExeption e) {
 //            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 //        }
@@ -65,7 +51,9 @@ public class EntryController {
     @GetMapping("")
     public ResponseEntity<?> findByIdInARange(@RequestParam("DoorId") String doorId, @RequestParam("FromDate") String fromDate, @RequestParam("ToDate") String toDate){
         try {
-            return new ResponseEntity<>(serviceEntry.findEntryByDateRangeAndDoorId(fromDate, toDate, doorId), HttpStatus.OK);
+            System.out.println(doorId + " " + fromDate + " " + toDate);
+            List<Entry> lista = serviceEntry.findEntryByDateRangeAndDoorId(fromDate, toDate, doorId);
+            return new ResponseEntity<>(lista, HttpStatus.OK);
         } catch (MyExeption e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
         }
@@ -80,17 +68,6 @@ public class EntryController {
 //    @GetMapping("/{doorId}")
 //    public String findByIdInARange(@PathVariable String doorId){
 //        return doorId ;
-//    }
-
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<String> deleteEntry(@PathVariable("id") String entryId){
-//        try {
-//            serviceEntry.deleteEntry(entryId);
-//            String respuesta = new String("Entry Succesfully Deleted");
-//            return new ResponseEntity<>(respuesta, HttpStatus.OK);
-//        } catch (MyExeption e) {
-//            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
-//        }
 //    }
 
     @DeleteMapping("/{id}")
